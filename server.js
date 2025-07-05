@@ -12,10 +12,10 @@ app.use(bodyParser.json());
 
 const JWT_SECRET = "your-secret-key";
 
-mongoose.connect("mongodb://localhost:27017/lunchclub", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected ✅"))
+  .catch((err) => console.error("MongoDB Connection Failed ❌", err));
+
 console.log("MongoDB Connected ✅");
 
 app.post("/api/register", async (req, res) => {
